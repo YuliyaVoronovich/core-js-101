@@ -535,8 +535,16 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const newMap = new Map();
+
+  array.map((obj) => {
+    const key = keySelector(obj);
+    const value = valueSelector(obj);
+
+    return newMap.has(key) ? newMap.get(key).push(value) : newMap.set(key, [value]);
+  });
+  return newMap;
 }
 
 
@@ -593,8 +601,14 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const arrResult = [];
+
+  const head = arr.splice(0, Math.floor(arr.length / 2));
+  const tail = arr.splice(-head.length);
+  const middle = arr.splice(0);
+
+  return arrResult.concat(tail).concat(middle).concat(head);
 }
 
 
